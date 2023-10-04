@@ -7,7 +7,6 @@ import com.java.writemodules.model.OrderDetails;
 import com.java.writemodules.model.ResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public class DynamoDBConnection {
     static DynamoDbConnection dynamoDbConnection;
 
     /**
-     * Pass save method for single entries
+     * Pass save method for single entries ( deprecated for later )
      * @param orderDetails
      * @return
      */

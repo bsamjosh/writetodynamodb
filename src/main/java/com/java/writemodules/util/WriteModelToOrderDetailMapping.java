@@ -19,17 +19,17 @@ public class WriteModelToOrderDetailMapping {
                 .build();
     }
 
-    public static List<OrderDetails> convertWriteModelToOrderDetails(WriteModel writeModel , int numberOfProducts){
+    public static List<OrderDetails> convertWriteModelToOrderDetails(List<WriteModel> writeModel , int numberOfProducts){
 
         List<OrderDetails> orderDetails = null;
         for(int i = 0 ; i < numberOfProducts ; i++){
             var orderDetail = OrderDetails.builder()
-                    .orderNumber(writeModel.getOrderNumber())
-                    .orderDate(writeModel.getOrderDate())
-                    .customerId(writeModel.getCustomerDetails().getCustomerId())
-                    .customerDetails(writeModel.getCustomerDetails())
-                    .shippingDetails(writeModel.getShippingDetails().get(i))
-                    .productId(writeModel.getProductDetails().get(i).getProductId())
+                    .orderNumber(writeModel.get(i).getOrderNumber())
+                    .orderDate(writeModel.get(i).getOrderDate())
+                    .customerId(writeModel.get(i).getCustomerDetails().getCustomerId())
+                    .customerDetails(writeModel.get(i).getCustomerDetails())
+                    .shippingDetails(writeModel.get(i).getShippingDetails().get(i))
+                    .productId(writeModel.get(i).getProductDetails().get(i).getProductId())
                     .build();
             orderDetails.add(orderDetail);
         }

@@ -1,7 +1,10 @@
 package com.java.writemodules.services;
 
+import com.java.writemodules.model.OrderDetails;
+import com.java.writemodules.model.ValidateKeyColumns;
 import com.java.writemodules.model.WriteModel;
 import com.java.writemodules.util.DynamoDBConnection;
+import com.java.writemodules.util.KeyColumnValidation;
 import com.java.writemodules.util.WriteModelToOrderDetailMapping;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +14,17 @@ import java.util.List;
 public class WriteToDynamoServices {
 
     public Object save (WriteModel writeModel){
+        KeyColumnValidation.validateKeyColumns(writeModel);
         var orderDetails = WriteModelToOrderDetailMapping.convertWriteModelToOrderDetail(writeModel);
-        var saveResult = DynamoDBConnection.save(orderDetails);
-        return saveResult;
+        List<OrderDetails> toSave = null;
+        toSave.add(orderDetails);
+        return DynamoDBConnection.saves(toSave);
     }
 
     public Object saves (List<WriteModel> writeModels){
 
-        return new Object();
+        var orderDetails = WriteModelToOrderDetailMapping.
+                                            convertWriteModelToOrderDetails(writeModels,writeModels.size());
+        return DynamoDBConnection.saves(orderDetails);
     }
 }
