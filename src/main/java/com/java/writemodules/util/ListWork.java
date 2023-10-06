@@ -26,7 +26,7 @@ public class ListWork {
     /**
      * takes order details to get the order ID's which are going to be saved.
      * @param orderDetails
-     * @return list of order numbers
+     * @return list of orderNumbers for given orderDetails
      */
     public static List<String> getOrderIdForLogs(List<OrderDetails> orderDetails){
         List<String> orderNumbers = null;
@@ -39,7 +39,7 @@ public class ListWork {
     /**
      * gets the write model and validate order number , order date and shipping details are present
      * @param writeModel
-     * @return list of write models which passes condition to be saved.
+     * @return list of valid WriteModel which passed key , sort and valid shipping columns to be saved.
      */
     public static List<WriteModel> filterKeyColumnToSave(List<WriteModel> writeModel){
         List<WriteModel> toSave = new ArrayList<>();

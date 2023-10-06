@@ -22,9 +22,9 @@ public class DynamoDBConnection {
     static DynamoDbConnection dynamoDbConnection;
 
     /**
-     * Pass save method for single entries ( deprecated for later )
+     * Pass save method for single entries ( deprecated for later    )
      * @param orderDetails
-     * @return
+     * @return saves result
      */
     public static ResultModel save(OrderDetails orderDetails){
         String orderNumber = orderDetails.getOrderNumber();
@@ -37,7 +37,7 @@ public class DynamoDBConnection {
     /**
      * Save for batch save. More orders are saved.
      * @param orderDetails
-     * @return
+     * @return saves result
      */
     public static Object saves(List<OrderDetails> orderDetails){
         List<String> orderNumbers = ListWork.getOrderIdForLogs(orderDetails);
