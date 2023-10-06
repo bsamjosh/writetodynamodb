@@ -5,6 +5,7 @@ import com.java.writemodules.component.DynamoDbConnection;
 import com.java.writemodules.exceptions.OrderIdNotSavedExceptions;
 import com.java.writemodules.model.OrderDetails;
 import com.java.writemodules.model.ResultModel;
+import lombok.experimental.UtilityClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author Sam Berchmans
  */
 
+@UtilityClass
 public class DynamoDBConnection {
 
     @Autowired

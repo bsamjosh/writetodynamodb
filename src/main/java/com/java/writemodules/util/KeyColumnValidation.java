@@ -2,11 +2,13 @@ package com.java.writemodules.util;
 
 import com.java.writemodules.exceptions.CustomKeyColumnNotPresent;
 import com.java.writemodules.model.WriteModel;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Validates the key column and returns response entity for single workdetails save.
  */
+@UtilityClass
 @Slf4j
 public class KeyColumnValidation {
 
