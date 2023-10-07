@@ -34,7 +34,7 @@ public class OrderDetails {
     @DynamoDBAttribute(attributeName = "productId")
     private List<String> productId;
 
-    @DynamoDBIndexRangeKey(attributeName = "subOrderNumber" )
+    @DynamoDBRangeKey(attributeName = "subOrderNumber" )
     @DynamoDBIndexHashKey(attributeName = "subOrderNumber" , globalSecondaryIndexName = "subOrderNumber-index")
     private String subOrderNumber;
 
