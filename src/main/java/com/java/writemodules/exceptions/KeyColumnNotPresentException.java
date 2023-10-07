@@ -1,16 +1,10 @@
 package com.java.writemodules.exceptions;
 
-import lombok.Builder;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Generated
-@Getter
-@Setter
-@Builder
-public class KeyColumnNotPresentException extends RuntimeException {
-    String columnName;
+/**
+ * Custom java exception to catch the key column exception.
+ */
+public class KeyColumnNotPresentException extends Exception{
+    public KeyColumnNotPresentException(String message){
+        super(message);
+    }
 }

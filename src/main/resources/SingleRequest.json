@@ -1,0 +1,27 @@
+{
+  "orderDate": "06102024",
+  "orderNumber": "OCTOBER202305-012",
+  "productDetails": [
+    {
+      "productId": ["10","11","15"],
+      "productDetails": ["kids shirt","ladies shirt","ladies pant"],
+      "price": [11.99,15.99,17.99],
+      "subOrder": "OCTOBER202305-012-001"
+    }
+  ],
+  "shippingDetails": [
+    {
+      "trackingNumber": "13312345565",
+      "orderStatus": "Progress",
+      "subOrder": "OCTOBER202305-012-001"
+    }
+  ],
+  "customerDetails": {
+    "customerId": "1212123",
+    "customerName": "Sam Berchmans",
+    "preferredCustomer": 0,
+    "address": "140 Old Road",
+    "deliveryAddress": "120 Vail Rd",
+    "addressIndicator": "N"
+  }
+}
