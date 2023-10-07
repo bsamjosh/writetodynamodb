@@ -2,6 +2,7 @@ package com.java.writemodules.util;
 
 import com.java.writemodules.model.OrderDetails;
 import com.java.writemodules.model.ProductDetails;
+import com.java.writemodules.model.ShippingDetails;
 import com.java.writemodules.model.WriteModel;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -42,12 +43,25 @@ public class ListWork {
      * @return list of valid WriteModel which passed key , sort and valid shipping columns to be saved.
      */
     public static List<WriteModel> filterKeyColumnToSave(List<WriteModel> writeModel){
-        List<WriteModel> toSave = new ArrayList<>();
         log.info("Checking key columns to filter data");
-        toSave = writeModel.stream()
+        List<WriteModel> toSave = writeModel.stream()
                 .filter(writeModels ->
-                    !writeModels.getOrderNumber().isBlank() || !writeModels.getOrderDate().isBlank() || !writeModels.getShippingDetails().get(0).getOrderStatus().isBlank()
+                    !writeModels.getOrderNumber().isBlank()
+                            || !writeModels.getOrderDate().isBlank()
+                            || !writeModels.getShippingDetails().get(0).getOrderStatus().isBlank()
+//                            || writeModels.getShippingDetails().size() == writeModels.getProductDetails().size()
+                            || matchProductDetailsSubOrderToShippingDetails(writeModels.getShippingDetails(),writeModels.getProductDetails())
                 ).collect(Collectors.toList());
         return toSave;
+    }
+
+    /**
+     * validates the shipping details and product details suborders are present
+     * @param shippingDetails
+     * @param productDetails
+     * @return
+     */
+    public static boolean matchProductDetailsSubOrderToShippingDetails(List<ShippingDetails> shippingDetails , List<ProductDetails> productDetails){
+       return shippingDetails.size() == productDetails.size() && shippingDetails.containsAll(productDetails);
     }
 }

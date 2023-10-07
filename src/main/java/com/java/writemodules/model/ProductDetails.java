@@ -16,4 +16,5 @@ public class ProductDetails {
     List<String> productId;
     List<String> productDetails;
     List<BigDecimal> price;
+    String subOrder;
 }

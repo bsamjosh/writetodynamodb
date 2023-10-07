@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class ShippingDetails {
     int trackingNumber;
     String orderStatus;
+    String subOrder;
 }
