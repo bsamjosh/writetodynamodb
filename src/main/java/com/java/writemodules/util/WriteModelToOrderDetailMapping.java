@@ -26,7 +26,7 @@ public class WriteModelToOrderDetailMapping {
                 .customerId(writeModel.getCustomerDetails().getCustomerId())
                 .customerDetails(writeModel.getCustomerDetails())
                 .shippingDetails(writeModel.getShippingDetails().get(0))
-                .productId(ListWork.splitProductIdFromDetails(writeModel.getProductDetails().get(0)))
+                .productId(ListWork.splitProductIdFromProductDetails(writeModel.getProductDetails().get(0)))
                 .subOrderNumber(writeModel.getProductDetails().get(0).getSubOrder())
                 .build();
 

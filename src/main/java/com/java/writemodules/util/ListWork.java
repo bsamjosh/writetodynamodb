@@ -19,10 +19,10 @@ public class ListWork {
     /**
      * Get Product details to return purchased product details
      * @param productDetails
-     * @return list of product details
+     * @return list of productid
      */
-    public static List<String> splitProductIdFromDetails(ProductDetails productDetails){
-        return productDetails.getProductDetails();
+    public static List<String> splitProductIdFromProductDetails(ProductDetails productDetails){
+        return productDetails.getProductId();
     }
 
     /**
