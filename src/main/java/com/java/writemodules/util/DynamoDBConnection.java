@@ -21,7 +21,7 @@ import java.util.List;
 public class DynamoDBConnection {
 
     @Autowired
-    private DynamoDbConnection dynamoDbConnection;
+    DynamoDbConnection dynamoDbConnection;
 
     /**
      * Pass save method for single entries ( deprecated for later    )

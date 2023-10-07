@@ -1,6 +1,6 @@
 package com.java.writemodules.util;
 
-import com.java.writemodules.exceptions.CustomKeyColumnNotPresent;
+import com.java.writemodules.exceptions.KeyColumnNotPresentException;
 import com.java.writemodules.model.WriteModel;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class KeyColumnValidation {
             validateTableKey(writeModel);
             validateSortKey(writeModel);
             validateShippingDetails(writeModel);
-        } catch (CustomKeyColumnNotPresent e) {
+        } catch (KeyColumnNotPresentException e) {
             throw new RuntimeException(e);
         }
 
@@ -31,40 +31,40 @@ public class KeyColumnValidation {
     /**
      * Validates if key column is present in writemodel
      * @param writeModel
-     * @throws CustomKeyColumnNotPresent
+     * @throws KeyColumnNotPresentException
      */
-    public static void validateTableKey(WriteModel writeModel) throws CustomKeyColumnNotPresent {
-        if(!writeModel.getOrderNumber().isBlank() || writeModel.getOrderNumber() != null){
-            log.info("Key Column present - {} ",writeModel.getOrderNumber());
-        }else {
-            throw new CustomKeyColumnNotPresent("Key Column is blank");
+    public static void validateTableKey(WriteModel writeModel) throws KeyColumnNotPresentException {
+        if(StringChecks.validateIfEmptyAndEmpty(writeModel.getOrderNumber())){
+            throw new KeyColumnNotPresentException("KeyColumn OrderNumber is blank");
         }
     }
 
     /**
      * Validates if sort key is present
      * @param writeModel
-     * @throws CustomKeyColumnNotPresent
+     * @throws KeyColumnNotPresentException
      */
-    public static void validateSortKey(WriteModel writeModel) throws CustomKeyColumnNotPresent {
-        if(!writeModel.getOrderDate().isBlank() || writeModel.getOrderDate() != null){
-            log.info("Sort key is present");
-        }else{
-            throw new CustomKeyColumnNotPresent("Sort Key not present");
+    public static void validateSortKey(WriteModel writeModel) throws KeyColumnNotPresentException {
+        if(StringChecks.validateIfEmptyAndEmpty(writeModel.getOrderDate())){
+            throw new KeyColumnNotPresentException("SortKey - OrderDate not present");
         }
     }
 
     /**
      * Validates if shipping details are present.
      * @param writeModel
-     * @throws CustomKeyColumnNotPresent
+     * @throws KeyColumnNotPresentException
      */
-    public static void validateShippingDetails(WriteModel writeModel) throws CustomKeyColumnNotPresent {
-        if(writeModel.getShippingDetails().size() > 0 || writeModel.getShippingDetails().get(0).getOrderStatus() != null){
-            log.info("Shipping details is present");
-        } else{
-            throw new CustomKeyColumnNotPresent("Shipping details not present");
+    public static void validateShippingDetails(WriteModel writeModel) throws KeyColumnNotPresentException {
+        if(writeModel.getShippingDetails().size() > 0) {
+            if(StringChecks.validateIfEmptyAndEmpty(writeModel.getShippingDetails().get(0).getTrackingNumber())
+                || StringChecks.validateIfEmptyAndEmpty(writeModel.getShippingDetails().get(0).getOrderStatus())
+                || StringChecks.validateIfEmptyAndEmpty(writeModel.getShippingDetails().get(0).getSubOrder()) ){
+                throw new KeyColumnNotPresentException("Shippingdetails is available, but tracking details are not present");
+            }
+        }else{
+            throw new KeyColumnNotPresentException("Shippingdetails not available");
         }
-    }
 
+    }
 }
