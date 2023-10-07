@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
@@ -49,19 +50,25 @@ public class ListWork {
                     !writeModels.getOrderNumber().isBlank()
                             || !writeModels.getOrderDate().isBlank()
                             || !writeModels.getShippingDetails().get(0).getOrderStatus().isBlank()
-//                            || writeModels.getShippingDetails().size() == writeModels.getProductDetails().size()
+                            || writeModels.getShippingDetails().size() == writeModels.getProductDetails().size()
                             || matchProductDetailsSubOrderToShippingDetails(writeModels.getShippingDetails(),writeModels.getProductDetails())
                 ).collect(Collectors.toList());
         return toSave;
     }
 
     /**
-     * validates the shipping details and product details suborders are present
+     * Validates the shippingDetails and productDetails sub order number matching and have same in both places
      * @param shippingDetails
      * @param productDetails
-     * @return
+     * @return boolean value
      */
     public static boolean matchProductDetailsSubOrderToShippingDetails(List<ShippingDetails> shippingDetails , List<ProductDetails> productDetails){
-       return shippingDetails.size() == productDetails.size() && shippingDetails.containsAll(productDetails);
+
+        Set<String> shippingDetailOrderNumber = shippingDetails.stream()
+                                                    .map(shippingDetail -> shippingDetail.getSubOrder())
+                                                    .collect(Collectors.toSet());
+
+        return productDetails.stream().anyMatch(productDetail
+                -> shippingDetailOrderNumber.contains(productDetail.getSubOrder()));
     }
 }
