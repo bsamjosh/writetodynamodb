@@ -19,7 +19,7 @@ import java.util.List;
 public class DynamoDBConnection {
 
     @Autowired
-    static DynamoDbConnection dynamoDbConnection;
+    private DynamoDbConnection dynamoDbConnection;
 
     /**
      * Pass save method for single entries ( deprecated for later    )

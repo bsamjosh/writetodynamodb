@@ -31,7 +31,7 @@ public class ListWork {
      * @return list of orderNumbers for given orderDetails
      */
     public static List<String> getOrderIdForLogs(List<OrderDetails> orderDetails){
-        List<String> orderNumbers = null;
+        List<String> orderNumbers = new ArrayList<>();
         for(int i = 0 ; i < orderDetails.size() ; i++){
             orderNumbers.add(orderDetails.get(i).getOrderNumber());
         }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ShippingDetails {
-    int trackingNumber;
+    String trackingNumber;
     String orderStatus;
     String subOrder;
 }

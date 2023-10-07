@@ -35,7 +35,7 @@ public class KeyColumnValidation {
      */
     public static void validateTableKey(WriteModel writeModel) throws CustomKeyColumnNotPresent {
         if(!writeModel.getOrderNumber().isBlank() || writeModel.getOrderNumber() != null){
-            log.info("Key Column present - () ",writeModel.getOrderNumber());
+            log.info("Key Column present - {} ",writeModel.getOrderNumber());
         }else {
             throw new CustomKeyColumnNotPresent("Key Column is blank");
         }
