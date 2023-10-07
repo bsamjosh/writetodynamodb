@@ -1,10 +1,11 @@
-package com.java.writemodules.util;
+package com.java.writemodules.component;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.java.writemodules.component.DynamoDbConnection;
 import com.java.writemodules.exceptions.OrderIdNotSavedExceptions;
 import com.java.writemodules.model.OrderDetails;
 import com.java.writemodules.model.ResultModel;
+import com.java.writemodules.util.ListWork;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,10 +16,9 @@ import java.util.List;
  * contains list of methods which are executed to do save , update and delete operations.
  * @author Sam Berchmans
  */
-
 @Component
 @Slf4j
-public class DynamoDBConnection {
+public class DynamoDBSave {
 
     @Autowired
     DynamoDbConnection dynamoDbConnection;
