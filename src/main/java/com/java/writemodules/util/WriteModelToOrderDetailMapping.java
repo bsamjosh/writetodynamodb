@@ -27,6 +27,7 @@ public class WriteModelToOrderDetailMapping {
                 .customerDetails(writeModel.getCustomerDetails())
                 .shippingDetails(writeModel.getShippingDetails().get(0))
                 .productId(ListWork.splitProductIdFromDetails(writeModel.getProductDetails().get(0)))
+                .subOrderNumber(writeModel.getProductDetails().get(0).getSubOrder())
                 .build();
 
         List<OrderDetails> orderDetailsList = new ArrayList<>();
@@ -53,6 +54,7 @@ public class WriteModelToOrderDetailMapping {
                     .customerDetails(writeModel.get(i).getCustomerDetails())
                     .shippingDetails(writeModel.get(i).getShippingDetails().get(i))
                     .productId(writeModel.get(i).getProductDetails().get(i).getProductId())
+                    .subOrderNumber(writeModel.get(i).getProductDetails().get(i).getSubOrder())
                     .build();
             orderDetails.add(orderDetail);
         }

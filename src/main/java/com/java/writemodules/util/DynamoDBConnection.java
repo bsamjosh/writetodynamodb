@@ -5,8 +5,9 @@ import com.java.writemodules.component.DynamoDbConnection;
 import com.java.writemodules.exceptions.OrderIdNotSavedExceptions;
 import com.java.writemodules.model.OrderDetails;
 import com.java.writemodules.model.ResultModel;
-import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,7 +16,8 @@ import java.util.List;
  * @author Sam Berchmans
  */
 
-@UtilityClass
+@Component
+@Slf4j
 public class DynamoDBConnection {
 
     @Autowired
@@ -26,7 +28,7 @@ public class DynamoDBConnection {
      * @param orderDetails
      * @return saves result
      */
-    public static ResultModel save(OrderDetails orderDetails){
+    public ResultModel save(OrderDetails orderDetails){
         String orderNumber = orderDetails.getOrderNumber();
         dynamoDbConnection.returnMapper().save(orderDetails);
         return ResultModel.builder()
@@ -39,8 +41,9 @@ public class DynamoDBConnection {
      * @param orderDetails
      * @return saves result
      */
-    public static Object saves(List<OrderDetails> orderDetails){
+    public Object saves(List<OrderDetails> orderDetails){
         List<String> orderNumbers = ListWork.getOrderIdForLogs(orderDetails);
+        log.info("Order Numbers to process --> {} ",orderNumbers.toString());
         List<DynamoDBMapper.FailedBatch> resultOrderIds = dynamoDbConnection.returnMapper().batchSave(orderDetails);
         if(resultOrderIds.size() > 0){
             return OrderIdNotSavedExceptions.builder()

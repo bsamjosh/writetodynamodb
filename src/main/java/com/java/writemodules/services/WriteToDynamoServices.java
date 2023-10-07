@@ -6,6 +6,7 @@ import com.java.writemodules.util.DynamoDBConnection;
 import com.java.writemodules.util.KeyColumnValidation;
 import com.java.writemodules.util.ListWork;
 import com.java.writemodules.util.WriteModelToOrderDetailMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,9 @@ import java.util.List;
 @Service
 public class WriteToDynamoServices {
 
+    @Autowired
+    DynamoDBConnection dynamoDBConnection;
+
     /**
      * Single to write data
      * @param writeModel
@@ -24,7 +28,7 @@ public class WriteToDynamoServices {
     public Object save (WriteModel writeModel){
         KeyColumnValidation.validateKeyColumns(writeModel);
         var orderDetails = WriteModelToOrderDetailMapping.convertWriteModelToOrderDetail(writeModel);
-        return DynamoDBConnection.saves(orderDetails);
+        return dynamoDBConnection.saves(orderDetails);
     }
 
     /**
@@ -37,6 +41,6 @@ public class WriteToDynamoServices {
         var filterData = ListWork.filterKeyColumnToSave(writeModels);
         var orderDetails = WriteModelToOrderDetailMapping.
                                             convertWriteModelToOrderDetails(filterData,writeModels.size());
-        return DynamoDBConnection.saves(orderDetails);
+        return dynamoDBConnection.saves(orderDetails);
     }
 }
