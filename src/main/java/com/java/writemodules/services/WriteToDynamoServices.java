@@ -1,8 +1,7 @@
 package com.java.writemodules.services;
 
-import com.java.writemodules.model.OrderDetails;
 import com.java.writemodules.model.WriteModel;
-import com.java.writemodules.util.DynamoDBConnection;
+import com.java.writemodules.component.DynamoDBSave;
 import com.java.writemodules.util.KeyColumnValidation;
 import com.java.writemodules.util.ListWork;
 import com.java.writemodules.util.WriteModelToOrderDetailMapping;
@@ -18,7 +17,7 @@ import java.util.List;
 public class WriteToDynamoServices {
 
     @Autowired
-    DynamoDBConnection dynamoDBConnection;
+    DynamoDBSave dynamoDBSave;
 
     /**
      * Single to write data
@@ -28,7 +27,7 @@ public class WriteToDynamoServices {
     public Object save (WriteModel writeModel){
         KeyColumnValidation.validateKeyColumns(writeModel);
         var orderDetails = WriteModelToOrderDetailMapping.convertWriteModelToOrderDetail(writeModel);
-        return dynamoDBConnection.saves(orderDetails);
+        return dynamoDBSave.saves(orderDetails);
     }
 
     /**
@@ -41,6 +40,6 @@ public class WriteToDynamoServices {
         var filterData = ListWork.filterKeyColumnToSave(writeModels);
         var orderDetails = WriteModelToOrderDetailMapping.
                                             convertWriteModelToOrderDetails(filterData,writeModels.size());
-        return dynamoDBConnection.saves(orderDetails);
+        return dynamoDBSave.saves(orderDetails);
     }
 }
