@@ -1,0 +1,99 @@
+[
+  {
+    "orderDate": "08102024",
+    "orderNumber": "OCTOBER20231008-012",
+    "productDetails": [
+      {
+        "productId": ["10","11","15"],
+        "productDetails": ["kids shirt","ladies shirt","ladies pant"],
+        "price": [11.99,15.99,17.99],
+        "subOrder": "OCTOBER20231008-012-001"
+      },
+      {
+        "productId": ["12","14","16"],
+        "productDetails": ["kids pant","ladies pant","ladies leggings"],
+        "price": [11.99,15.99,17.99],
+        "subOrder": "OCTOBER20231008-012-002"
+      }
+    ],
+    "shippingDetails": [
+      {
+        "trackingNumber": "13312345565",
+        "orderStatus": "Shipped",
+        "subOrder": "OCTOBER20231008-012-001"
+      },{
+        "trackingNumber": "133123444565",
+        "orderStatus": "Yet to be picked up",
+        "subOrder": "OCTOBER20231008-012-002"
+      }
+    ],
+    "customerDetails": {
+      "customerId": "1212123",
+      "customerName": "Sam Berchmans",
+      "preferredCustomer": 0,
+      "address": "140 Old Road",
+      "deliveryAddress": "120 Vail Rd",
+      "addressIndicator": "N"
+    }
+  },
+  {
+    "orderDate": "07102024",
+    "orderNumber": "OCTOBER20231007-015",
+    "productDetails": [
+      {
+        "productId": ["8","7","15"],
+        "productDetails": ["men shirt","boys shirt","ladies pant"],
+        "price": [11.99,15.99,17.99],
+        "subOrder": "OCTOBER20231007-015-001"
+      }
+    ],
+    "shippingDetails": [
+      {
+        "trackingNumber": "13312345565",
+        "orderStatus": "Shipped",
+        "subOrder": "OCTOBER20231007-015-001"
+      }
+    ],
+    "customerDetails": {
+      "customerId": "1212133",
+      "customerName": "Joshua J",
+      "preferredCustomer": 0,
+      "address": "141 Old Road",
+      "deliveryAddress": "100 Vail Rd",
+      "addressIndicator": "N"
+    }
+  },
+  {
+    "orderDate": "06102024",
+    "orderNumber": "OCTOBER20231006-012",
+    "productDetails": [
+      {
+        "productId": ["10","11","15"],
+        "productDetails": ["kids shirt","ladies shirt","ladies pant"],
+        "price": [11.99,15.99,17.99],
+        "subOrder": "OCTOBER20231006-012-001"
+      },
+      {
+        "productId": ["14","19","15"],
+        "productDetails": ["Ladies shirt","ladies skirt","ladies pant"],
+        "price": [11.99,15.99,17.99],
+        "subOrder": "OCTOBER20231006-012-002"
+      }
+    ],
+    "shippingDetails": [
+      {
+        "trackingNumber": "13312345565",
+        "orderStatus": "Delivered",
+        "subOrder": "OCTOBER20231006-012-001"
+      }
+    ],
+    "customerDetails": {
+      "customerId": "12122123",
+      "customerName": "Allan D",
+      "preferredCustomer": 1,
+      "address": "100 Old Road",
+      "deliveryAddress": "",
+      "addressIndicator": ""
+    }
+  }
+]
