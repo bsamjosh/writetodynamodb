@@ -38,4 +38,7 @@ public class OrderDetails {
     @DynamoDBIndexHashKey(attributeName = "subOrderNumber" , globalSecondaryIndexName = "subOrderNumber-index")
     private String subOrderNumber;
 
+    @DynamoDBAttribute(attributeName = "orderNumberReference")
+    private String orderNumberReference;
+
 }

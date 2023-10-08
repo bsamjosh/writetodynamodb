@@ -24,19 +24,6 @@ public class DynamoDBSave {
     DynamoDbConnection dynamoDbConnection;
 
     /**
-     * Pass save method for single entries ( deprecated for later    )
-     * @param orderDetails
-     * @return saves result
-     */
-    public ResultModel save(OrderDetails orderDetails){
-        String orderNumber = orderDetails.getOrderNumber();
-        dynamoDbConnection.returnMapper().save(orderDetails);
-        return ResultModel.builder()
-                .resultValue("Order number - "+orderNumber+" : Added Successfully.")
-                .build();
-    }
-
-    /**
      * Save for batch save. More orders are saved.
      * @param orderDetails
      * @return saves result

@@ -5,15 +5,15 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class StringChecks {
 
-    public static boolean validateIfEmpty(String inString){
+    public boolean validateIfEmpty(String inString){
         return inString.isEmpty() || inString.isBlank();
     }
 
-    public static boolean validateIfNull(String inString){
+    public boolean validateIfNull(String inString){
         return inString == null || inString.equals(null);
     }
 
-    public static boolean validateIfEmptyAndEmpty(String inString){
+    public boolean validateIfEmptyAndEmpty(String inString){
         return validateIfEmpty(inString) || validateIfNull(inString);
 
     }
