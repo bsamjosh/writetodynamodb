@@ -18,21 +18,21 @@ public class WriteModelToOrderDetailMapping {
      * @param writeModel
      * @return Order Details
      */
-    public static List<OrderDetails> convertWriteModelToOrderDetail(WriteModel writeModel){
-
-        var orderDetails = OrderDetails.builder()
-                .orderNumber(writeModel.getOrderNumber())
-                .orderDate(writeModel.getOrderDate())
-                .customerId(writeModel.getCustomerDetails().getCustomerId())
-                .customerDetails(writeModel.getCustomerDetails())
-                .shippingDetails(writeModel.getShippingDetails().get(0))
-                .productId(ListWork.splitProductIdFromProductDetails(writeModel.getProductDetails().get(0)))
-                .subOrderNumber(writeModel.getProductDetails().get(0).getSubOrder())
-                .build();
-
+    public List<OrderDetails> convertWriteModelToOrderDetail(WriteModel writeModel){
         List<OrderDetails> orderDetailsList = new ArrayList<>();
-        orderDetailsList.add(orderDetails);
-
+        for (int i = 0 ; i < writeModel.getShippingDetails().size() ; i++){
+            var orderDetails = OrderDetails.builder()
+                    .orderNumber(writeModel.getShippingDetails().get(i).getSubOrder())
+                    .orderDate(writeModel.getOrderDate())
+                    .customerId(writeModel.getCustomerDetails().getCustomerId())
+                    .customerDetails(writeModel.getCustomerDetails())
+                    .shippingDetails(writeModel.getShippingDetails().get(i))
+                    .productId(ListWork.splitProductIdFromProductDetails(writeModel.getProductDetails().get(i)))
+                    .subOrderNumber(writeModel.getShippingDetails().get(i).getSubOrder())
+                    .orderNumberReference(writeModel.getOrderNumber())
+                    .build();
+            orderDetailsList.add(orderDetails);
+        }
         return orderDetailsList;
     }
 
@@ -43,20 +43,11 @@ public class WriteModelToOrderDetailMapping {
      * @return List of Order details to save
      */
 
-    public static List<OrderDetails> convertWriteModelToOrderDetails(List<WriteModel> writeModel , int numberOfProducts){
-
-        List<OrderDetails> orderDetails = null;
+    public List<OrderDetails> convertWriteModelToOrderDetails(List<WriteModel> writeModel , int numberOfProducts){
+        List<OrderDetails> orderDetails =  new ArrayList<>();;
         for(int i = 0 ; i < numberOfProducts ; i++){
-            var orderDetail = OrderDetails.builder()
-                    .orderNumber(writeModel.get(i).getOrderNumber())
-                    .orderDate(writeModel.get(i).getOrderDate())
-                    .customerId(writeModel.get(i).getCustomerDetails().getCustomerId())
-                    .customerDetails(writeModel.get(i).getCustomerDetails())
-                    .shippingDetails(writeModel.get(i).getShippingDetails().get(i))
-                    .productId(writeModel.get(i).getProductDetails().get(i).getProductId())
-                    .subOrderNumber(writeModel.get(i).getProductDetails().get(i).getSubOrder())
-                    .build();
-            orderDetails.add(orderDetail);
+            var orderDetailsList = convertWriteModelToOrderDetail(writeModel.get(i));
+            orderDetails.addAll(orderDetailsList);
         }
         return orderDetails;
     }
