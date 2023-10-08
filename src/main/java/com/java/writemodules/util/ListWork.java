@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,25 +49,35 @@ public class ListWork {
         List<WriteModel> toSave = writeModel.stream()
                 .filter(writeModels ->
                     !StringChecks.validateIfEmptyAndEmpty(writeModels.getOrderNumber())
-                            || !StringChecks.validateIfEmptyAndEmpty(writeModels.getOrderDate())
-                            || !StringChecks.validateIfEmptyAndEmpty(writeModels.getShippingDetails().get(0).getOrderStatus())
-                            || writeModels.getShippingDetails().size() == writeModels.getProductDetails().size()
-                            || matchProductDetailsSubOrderToShippingDetails(writeModels.getShippingDetails(),writeModels.getProductDetails())
-                ).collect(Collectors.toList());
+                            && !StringChecks.validateIfEmptyAndEmpty(writeModels.getOrderDate())
+                            && !StringChecks.validateIfEmptyAndEmpty(writeModels.getShippingDetails().get(0).getOrderStatus())
+                )
+                .map(writeModels
+                        -> {
+                                List<ProductDetails> matchingProductDetails
+                                    = returnMatchingListOfProductAndShippingDetails(writeModels.getShippingDetails(),writeModels.getProductDetails());
+                                writeModels.setProductDetails(matchingProductDetails);
+                                return writeModels;
+                            })
+                .collect(Collectors.toList());
         return toSave;
     }
 
     /**
-     * Validates the shippingDetails and productDetails suborder number matching and have same in both places
+     * return product details for shipping details suborder number matching and have same in both places
      * @param shippingDetails
      * @param productDetails
-     * @return boolean value
+     * @return list of Product details
      */
-    public boolean matchProductDetailsSubOrderToShippingDetails(List<ShippingDetails> shippingDetails , List<ProductDetails> productDetails){
+    public  List<ProductDetails> returnMatchingListOfProductAndShippingDetails(List<ShippingDetails> shippingDetails , List<ProductDetails> productDetails){
+        log.info("Using shipping list to filter product details ");
         Set<String> shippingDetailOrderNumber = shippingDetails.stream()
-                                                    .map(shippingDetail -> shippingDetail.getSubOrder())
-                                                    .collect(Collectors.toSet());
-        return productDetails.stream().anyMatch(productDetail
-                -> shippingDetailOrderNumber.contains(productDetail.getSubOrder()));
+                .map(shippingDetail -> shippingDetail.getSubOrder())
+                .collect(Collectors.toSet());
+
+        return productDetails.stream()
+                    .filter(productDetail ->
+                            shippingDetailOrderNumber.contains(productDetail.getSubOrder()))
+                    .collect(Collectors.toList());
     }
 }

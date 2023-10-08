@@ -39,7 +39,7 @@ public class WriteToDynamoServices {
 
         var filterData = ListWork.filterKeyColumnToSave(writeModels);
         var orderDetails = WriteModelToOrderDetailMapping.
-                                            convertWriteModelToOrderDetails(filterData,writeModels.size());
+                                            convertWriteModelToOrderDetails(filterData,filterData.size());
         return dynamoDBSave.saves(orderDetails);
     }
 }
