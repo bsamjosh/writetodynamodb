@@ -17,8 +17,7 @@ public class OrderDetails {
     @DynamoDBHashKey(attributeName = "orderNumber")
     private String orderNumber;
 
-    @DynamoDBIndexRangeKey(attributeName = "orderDate")
-//    @DynamoDBIndexHashKey(attributeName = "orderDate-Index")
+    @DynamoDBAttribute(attributeName = "orderDate" )
     private String orderDate;
 
     @DynamoDBAttribute(attributeName = "customerId")
@@ -34,5 +33,12 @@ public class OrderDetails {
 
     @DynamoDBAttribute(attributeName = "productId")
     private List<String> productId;
+
+    @DynamoDBRangeKey(attributeName = "subOrderNumber" )
+    @DynamoDBIndexHashKey(attributeName = "subOrderNumber" , globalSecondaryIndexName = "subOrderNumber-index")
+    private String subOrderNumber;
+
+    @DynamoDBAttribute(attributeName = "orderNumberReference")
+    private String orderNumberReference;
 
 }

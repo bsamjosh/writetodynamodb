@@ -1,15 +1,13 @@
 package com.java.writemodules.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Builder
 @AllArgsConstructor
 @Getter
+@Setter
 @NoArgsConstructor
 public class WriteModel {
     String orderDate;

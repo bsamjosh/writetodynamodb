@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Generated
 public class KeyColumnNotPresent {
 
-//    @ExceptionHandler(value = UnsupportedOperationException.class)
-    @ExceptionHandler(value = CustomKeyColumnNotPresent.class)
+    @ExceptionHandler(value = KeyColumnNotPresentException.class)
     public ResponseEntity<Object> returnWhenKeyColumnIsAbsent(KeyColumnNotPresentException exception){
-        return new ResponseEntity<>("Required Column - "+exception.getColumnName()+" not present in request",
+        return new ResponseEntity<>(exception.getMessage() + " " + HttpStatus.BAD_REQUEST ,
                 HttpStatus.BAD_REQUEST);
     }
 }
